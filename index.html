@@ -11,43 +11,48 @@
     <nav class="navbar container navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li v-for="(link, index) in links" class="nav-item active" :key="index">
+            <li v-for="(page, index) in pages" class="nav-item active" :key="index">
               <a 
                 class="nav-link" 
-                :href="link.url"
-                :title="`This link goes to ${link.text} page`">
-                {{link.text}}
+                :href="page.link.url"
+                :title="`This link goes to ${page.link.text} page`"
+                @click.prevent="activePage = index"
+                >
+                {{page.link.text}}
                 </a>
             </li>
           </ul>
         </div>
     </nav>
     <div id="content" class="container">
-        <h1>{{pageTitle}}</h1>
-        <p>{{content}}</p>
+        <h1>{{pages[activePage].pageTitle}}</h1>
+        <p>{{pages[activePage].content}}</p>
     </div>
 
     <script>
         Vue.createApp({
             data(){
                 return{
-                    links: [
-                        {text:"Home", url: "index.html"},
-                        {text:"About", url: "about.html"},
-                        {text:"Contact", url: "contact.html"}
+                    activePage: 0,
+                    pages: [
+                    {
+                        link: {text:"Home", url: "index.html"},
+                        pageTitle:"Hello, Home",
+                        content:"content hello hello"
+                    },
+                    {   link: {text:"About", url: "about.html"},
+                        pageTitle:"Hello, About",
+                        content:"content hello hello"
+                    },
+                    {
+                        link: {text:"Contact", url: "contact.html"},
+                        pageTitle:"Hello, Contact",
+                        content:"content hello hello"
+                    }
                     ]
                 }
             }
-        }).mount("nav");
-
-        Vue.createApp({
-            data(){
-                return{
-                    pageTitle:"Hello, Vue",
-                    content:"content hello hello"
-                };
-            }
-        }).mount("#content");
+        }).mount("body");
     </script>
 </body>
 </html>
