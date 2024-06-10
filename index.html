@@ -11,6 +11,7 @@
     <navbar
         :pages="pages"
         :active-page="activePage"
+        :nav-link-click="(index) => activePage = index"
     ></navbar>
 
     
@@ -56,7 +57,7 @@
         });
 
         app.component("navbar", {
-            props: ["pages","activePage"],
+            props: ["pages","activePage", "navLinkClick"],
             template: 
             `<nav 
                 :class="[\`bg-\${theme}\`, \`navbar-\${theme}\`, 'navbar', 'container', 'navbar-expand-lg']">
@@ -68,7 +69,7 @@
                         :class="{active: activePage == index}"
                         :href="page.link.url"
                         :title="\`This link goes to \${page.link.text} page\`"
-                        @click.prevent="activePage = index"
+                        @click.prevent="navLinkClick(index)"
                         >
                         {{page.link.text}}
                         </a>
