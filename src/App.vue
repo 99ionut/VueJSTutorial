@@ -38,6 +38,7 @@ export default {
     },
     pageCreated(pageObject) {
       console.log(pageObject);
+      this.pages.push(pageObject);
     },
   },
 };

@@ -1,15 +1,18 @@
 [{
     "link": { "text": "Home", "url": "index.html" },
     "title": "Hello, Home",
-    "content": "content hello home"
+    "content": "content hello home",
+    "published": true
   },
   {
     "link": { "text": "About", "url": "about.html" },
     "title": "Hello, About",
-    "content": "content hello About"
+    "content": "content hello About",
+    "published": true
   },
   {
     "link": { "text": "Contact", "url": "contact.html" },
     "title": "Hello, Contact",
-    "content": "content hello heContactContactllo"
+    "content": "content hello heContactContactllo",
+    "published": false
 }]
