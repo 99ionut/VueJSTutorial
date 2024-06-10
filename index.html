@@ -8,8 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar container navbar-expand-lg" 
-        :class="navbarClasses">
+    <!--putting it inside arrays makes it refresh automatically-->
+    <nav 
+        :class="[`bg-${theme}`, `navbar-${theme}`, 'navbar', 'container', 'navbar-expand-lg']">
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li v-for="(page, index) in pages" class="nav-item active" :key="index">
@@ -26,7 +27,7 @@
           </ul>
         </div>
         <button 
-            @click="useDarkNavbar = !useDarkNavbar"
+            @click="changeTheme"
             
             >Change mode</button>
     </nav>
@@ -37,21 +38,17 @@
 
     <script>
         Vue.createApp({
-            //functions that will execute, data only initializes
-            computed: {
-                navbarClasses(){
-                    return {
-                        "navbar-light": !this.useDarkNavbar,
-                        "bg-light": !this.useDarkNavbar,
-                        "navbar-dark": this.useDarkNavbar,
-                        "bg-dark": this.useDarkNavbar
-                    }
+            //functions go in the "methods"
+            methods:{
+                changeTheme(){
+                    console.log("change theme");
+                    this.theme = (this.theme == 'light' ? 'dark' : 'light');
                 }
             },
             data(){
                 return{
                     activePage: 0,
-                    useDarkNavbar: true,
+                    theme: "dark",
                     pages: [
                     {
                         link: {text:"Home", url: "index.html"},
