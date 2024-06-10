@@ -48,6 +48,14 @@
 
 <script>
 export default {
+    emits: {
+        pageCreated(pageObject){
+            if(!pageObject.pageTitle){
+                console.log("log eventtt");
+                return false;
+            }
+        }
+    },
   props: ["pageCreated"],
   data() {
     return {
@@ -70,12 +78,13 @@ export default {
         return;
       }
 
-      this.pageCreated({
+      this.$emit("pageCreated", {
         pageTitle: this.pageTitle,
         content: this.content,
         link: { text: this.linkText, url: this.linkUrl },
         published: this.published,
       });
+
 
       this.pageTitle = "";
       this.content = "";
