@@ -31,13 +31,13 @@
             
             >Change mode</button>
     </nav>
-    <div id="content" class="container">
-        <h1>{{pages[activePage].pageTitle}}</h1>
-        <p>{{pages[activePage].content}}</p>
-    </div>
+    <!--dash separated here-->
+    <page-viewer 
+        :page="pages[activePage]">
+    </page-viewer>
 
     <script>
-        Vue.createApp({
+        let app = Vue.createApp({
             //functions go in the "methods"
             methods:{
                 changeTheme(){
@@ -52,22 +52,35 @@
                     pages: [
                     {
                         link: {text:"Home", url: "index.html"},
-                        pageTitle:"Hello, Home",
-                        content:"content hello hello"
+                        title:"Hello, Home",
+                        content:"content hello home"
                     },
                     {   link: {text:"About", url: "about.html"},
-                        pageTitle:"Hello, About",
-                        content:"content hello hello"
+                        title:"Hello, About",
+                        content:"content hello About"
                     },
                     {
                         link: {text:"Contact", url: "contact.html"},
-                        pageTitle:"Hello, Contact",
-                        content:"content hello hello"
+                        title:"Hello, Contact",
+                        content:"content hello heContactContactllo"
                     }
                     ]
                 }
             }
-        }).mount("body");
+        });
+        
+        app.component('page-viewer', {
+            //camelcase here
+            props: ['page'],
+            template: `
+            <div class="container">
+                <h1>{{page.title}}</h1>
+                <p>{{page.content}}</p>
+            </div>
+            `
+        })
+
+        app.mount("body");
     </script>
 </body>
 </html>
