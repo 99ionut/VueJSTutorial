@@ -1,4 +1,3 @@
-``Vue
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@
 </head>
 <body>
     <nav class="navbar container navbar-expand-lg" 
-        :class="{'navbar-dark bg-dark': !useDarkNavbar, 'navbar-light bg-light': useDarkNavbar}">
+        :class="navbarClasses">
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li v-for="(page, index) in pages" class="nav-item active" :key="index">
@@ -38,6 +37,17 @@
 
     <script>
         Vue.createApp({
+            //functions that will execute, data only initializes
+            computed: {
+                navbarClasses(){
+                    return {
+                        "navbar-light": !this.useDarkNavbar,
+                        "bg-light": !this.useDarkNavbar,
+                        "navbar-dark": this.useDarkNavbar,
+                        "bg-dark": this.useDarkNavbar
+                    }
+                }
+            },
             data(){
                 return{
                     activePage: 0,
