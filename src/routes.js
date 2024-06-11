@@ -1,0 +1,14 @@
+import PageViewer from "./components/PageViewer.vue";
+import CreatePage from "./components/CreatePage.vue";
+import { createRouter, createWebHashHistory} from "vue-router";
+
+
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes: [
+        {path: "/", component: PageViewer},
+        {path: "/create", component: CreatePage}
+    ]
+})
+
+export default router;
