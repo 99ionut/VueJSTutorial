@@ -28,7 +28,7 @@
         <div class="mb-3">
           <div class="form-check">
             <input for="" class="form-check-input" type="checkbox" v-model="published" />
-            <label for="gridCheck1" class="orm-check-label">Published</label>
+            <label for="gridCheck1" class="form-check-label">Published</label>
           </div>
         </div>
       </div>

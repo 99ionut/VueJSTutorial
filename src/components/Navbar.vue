@@ -4,14 +4,15 @@
   >
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li v-for="(page, index) in publishedPages" class="nav-item active" :key="index">
-          <navbar-link
-            :page="page"
-            :isActive="activePage === index"
-            @click.prevent="navLinkClick(index)"
-          >
-          </navbar-link>
-        </li>
+        <navbar-link
+          v-for="(page, index) in publishedPages"
+          class="nav-item active"
+          :key="index"
+          :page="page"
+          :index="index"
+          :isActive="activePage === index"
+        >
+        </navbar-link>
       </ul>
     </div>
     <button @click="changeTheme">Change mode</button>
@@ -28,7 +29,7 @@ export default {
   created() {
     this.getThemeSettings();
   },
-  props: ["pages", "activePage", "navLinkClick"],
+  props: ["pages", "activePage"],
   data() {
     return {
       theme: "dark",
