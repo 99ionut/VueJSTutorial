@@ -13,6 +13,9 @@
           :isActive="activePage === index"
         >
         </navbar-link>
+        <li>
+          <router-link class="nav-link" :to="`/create`">create </router-link>
+        </li>
       </ul>
     </div>
     <button @click="changeTheme">Change mode</button>

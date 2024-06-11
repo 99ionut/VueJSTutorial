@@ -1,6 +1,7 @@
 <template>
   <li>
-    <a
+    <router-link
+      :to="`/${$route.params.index}`"
       class="nav-link"
       :class="activeClasses"
       :href="page.link.url"
@@ -8,7 +9,7 @@
       @click.prevent="$bus.$emit('navbarLinkActivated', index)"
     >
       {{ page.link.text }}
-    </a>
+    </router-link>
   </li>
 </template>
 
