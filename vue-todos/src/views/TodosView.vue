@@ -15,6 +15,10 @@ const createTodo = (todo) =>{
     isEditing: null
   })
 }
+
+const ToggleTodoComplete = (todoPosition) =>{
+  todoList.value[todoPosition].isComplete = !todoList.value[todoPosition].isComplete;
+}
 </script>
 
 <template>
@@ -22,7 +26,7 @@ const createTodo = (todo) =>{
     <h1>Create Todo</h1>
     <TodoCreator @create-todo="createTodo"/>
     <ul class="todo-list">
-      <TodoItem v-for="todo in todoList" :todo="todo"/>
+      <TodoItem v-for="(todo, index) in todoList" :todo="todo" :index="index" @toggle-complete="ToggleTodoComplete"/>
     </ul>
     <p v-if="todoList.length == 0" class="todos-msg">
       <span>you have no todos</span>
