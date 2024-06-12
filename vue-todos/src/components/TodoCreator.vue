@@ -1,15 +1,21 @@
 <script setup>
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
+
+const emit = defineEmits(["create-todo"]);
 
 const todo = ref("Testing");
+
+const createTodo = () =>{
+    //emit with values, add .value because you are using ref.
+    emit("create-todo", todo.value);
+}
 
 </script>
 <template lang="">
     <div class="input-wrap">
         <input type="text" v-model="todo">
-        <button>Create</button>
+        <button @click="createTodo()">Create</button>
     </div>
-    <p>{{todo}}</p>
 </template>
 
 <style lang="scss" scoped>
