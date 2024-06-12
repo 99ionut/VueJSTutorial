@@ -10,8 +10,14 @@ const todoState = reactive({
 });
 
 const createTodo = () =>{
-    //emit with values, add .value because you are using ref.
-    emit("create-todo", todoState.todo);
+    todoState.invalid = null;
+    if(todoState.todo !== ""){
+        emit("create-todo", todoState.todo);
+        todoState.todo="";
+        return;
+    }
+    todoState.invalid = true;
+    todoState.errMsg = "Todo value cannot be empty";
 }
 
 </script>
@@ -20,6 +26,8 @@ const createTodo = () =>{
         <input type="text" v-model="todoState.todo">
         <button @click="createTodo()">Create</button>
     </div>
+    <p v-if="todoState.invalid" class="err-msg">{{ todoState.errMsg}}</p>
+    <p v-show="todoState.invalid" class="err-msg">{{ todoState.errMsg}}</p>
 </template>
 
 <style lang="scss" scoped>
