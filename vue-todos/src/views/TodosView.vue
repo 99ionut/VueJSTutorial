@@ -8,7 +8,7 @@ const todoList = ref([]);
 const createTodo = (todo) =>{
   todoList.value.push({
     id: uid(),
-    todo,
+    todo: todo,
     isCompleted: null,
     isEditing: null
   })
@@ -18,7 +18,7 @@ const createTodo = (todo) =>{
 <template>
   <main>
     <h1>Create Todo</h1>
-    <TodoCreator @create-todo="createTodo()"/>
+    <TodoCreator @create-todo="createTodo"/>
     {{ todoList }}
   </main>
 </template>
