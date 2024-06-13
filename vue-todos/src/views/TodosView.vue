@@ -7,29 +7,48 @@ import TodoItem from '../components/TodoItem.vue'
 
 const todoList = ref([]);
 
+const fetchTodoList = () => {
+  const savedTodoList = JSON.parse(localStorage.getItem("todoList"));
+  if(savedTodoList){
+    todoList.value = savedTodoList;
+  }
+}
+
+const setTodoListLocalStorage = () => {
+  localStorage.setItem("todoList", JSON.stringify(todoList.value));
+}
+
+//setup script runs on every page reload
+fetchTodoList();
+
 const createTodo = (todo) =>{
   todoList.value.push({
     id: uid(),
     todo: todo,
     isCompleted: null,
     isEditing: null,
-  })
+  });
+  setTodoListLocalStorage();
 }
 
 const toggleTodoComplete = (todoPosition) =>{
   todoList.value[todoPosition].isComplete = !todoList.value[todoPosition].isComplete;
+  setTodoListLocalStorage();
 }
 
 const toggleEditTodo = (todoPosition) =>{
   todoList.value[todoPosition].isEditing = !todoList.value[todoPosition].isEditing;
+  setTodoListLocalStorage();
 }
 
 const updateTodo = (todoVal, todoPosition) => {
   todoList.value[todoPosition].todo = todoVal;
+  setTodoListLocalStorage();
 }
 
 const deleteTodo = (todoId) => {
   todoList.value = todoList.value.filter((todo) => todo.id !== todoId);
+  setTodoListLocalStorage();
 }
 
 </script>
@@ -41,7 +60,8 @@ const deleteTodo = (todoId) => {
     <ul class="todo-list">
       <TodoItem 
         v-for="(todo, index) in todoList" 
-        :todo="todo" :index="index"
+        :todo="todo" 
+        :index="index"
         @toggle-complete="toggleTodoComplete"
         @edit-todo="toggleEditTodo"
         @update-todo="updateTodo"
