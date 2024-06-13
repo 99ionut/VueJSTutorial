@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch} from 'vue'
+import { ref, watch, computed} from 'vue'
 import {uid} from "uid";
 import { Icon } from "@iconify/vue";
 import TodoCreator from '../components/TodoCreator.vue'
@@ -13,6 +13,10 @@ watch(todoList,(newValue,oldValue)=>{
 }, {
   deep: true
 });
+
+const todoCompleted = computed(() =>{
+  return todoList.value.every((todo)=> todo.isComplete);
+})
 
 const fetchTodoList = () => {
   const savedTodoList = JSON.parse(localStorage.getItem("todoList"));
@@ -72,6 +76,9 @@ const deleteTodo = (todoId) => {
     </ul>
     <p v-if="todoList.length == 0" class="todos-msg">
       <span>you have no todos</span>
+    </p>
+    <p v-if="todoCompleted && todoList.length > 0" class="todos-msg">
+      <span>Congratulations! you completed all todos!</span>
     </p>
   </main>
 </template>
